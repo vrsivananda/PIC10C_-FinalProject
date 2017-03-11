@@ -15,6 +15,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void initializeVectors();
+
 private slots:
 
     //Connect Slider to Spinbox
@@ -29,13 +31,24 @@ private slots:
     void on_spinBox_3_valueChanged(int arg);
     void on_spinBox_4_valueChanged(int arg);
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
-    int numberOfCongruentDots = 0;
-    int numberofIncongruentDots = 0;
+    int numberOfCongruentDots = 100;
+    int numberOfIncongruentDots = 100;
     int speedOfDotMovement = 0;
     double timePerTrial = 0;
+
+    std::vector<int> xValuesCongruent;
+    std::vector<int> yValuesCongruent;
+
+    std::vector<int> xValuesIncongruent;
+    std::vector<int> yValuesIncongruent;
+
+
+
 
 };
 

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>415</width>
-    <height>402</height>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -156,6 +156,19 @@
     </property>
     <property name="text">
      <string>Time per Trial:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>400</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start Trials</string>
     </property>
    </widget>
   </widget>

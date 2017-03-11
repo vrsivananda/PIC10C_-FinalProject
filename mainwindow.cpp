@@ -1,11 +1,18 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "time.h"
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    initializeVectors();
+
+
+
 
 }
 
@@ -21,7 +28,7 @@ void MainWindow::on_horizontalSlider_1_valueChanged(int value){
 }
 void MainWindow::on_horizontalSlider_2_valueChanged(int value){
     ui->spinBox_2->setValue(value);
-    numberofIncongruentDots = value;
+    numberOfIncongruentDots = value;
 }
 void MainWindow::on_horizontalSlider_3_valueChanged(int value){
     ui->spinBox_3->setValue(value);
@@ -39,7 +46,7 @@ void MainWindow::on_spinBox_1_valueChanged(int arg){
 }
 void MainWindow::on_spinBox_2_valueChanged(int arg){
     ui->horizontalSlider_2->setValue(arg);
-    numberofIncongruentDots = arg;
+    numberOfIncongruentDots = arg;
 }
 void MainWindow::on_spinBox_3_valueChanged(int arg){
     ui->horizontalSlider_3->setValue(arg);
@@ -51,5 +58,22 @@ void MainWindow::on_spinBox_4_valueChanged(int arg){
 }
 
 
+//Initialize Vectors
+void MainWindow::initializeVectors(){
+    for (int i = 0; i<numberOfCongruentDots; ++i){
+        xValuesCongruent.push_back(rand());
+        yValuesCongruent.push_back(rand());
+    }
+    for (int i = 0; i<numberOfCongruentDots; ++i){
+        xValuesIncongruent.push_back(rand());
+        yValuesIncongruent.push_back(rand());
+    }
+}
 
 
+
+//start another window when clicked
+void MainWindow::on_pushButton_clicked()
+{
+
+}
