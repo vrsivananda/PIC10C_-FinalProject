@@ -5,7 +5,7 @@
 #include <QObject>
 #include <QWidget>
 
-class DisplayWindow : public QMainWindow
+class DisplayWindow : public QWidget
 {
     Q_OBJECT
 public:

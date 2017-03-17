@@ -2,6 +2,9 @@
 #include "ui_mainwindow.h"
 #include "time.h"
 #include <QDebug>
+#include"displaywindow.h"
+
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -75,5 +78,7 @@ void MainWindow::initializeVectors(){
 //start another window when clicked
 void MainWindow::on_pushButton_clicked()
 {
+    DisplayWindow dw;
+    dw.show();
 
 }
