@@ -80,7 +80,7 @@ void MainWindow::on_pushButton_clicked()
 {
     //the display window object is created
     DisplayWindow* dw = new DisplayWindow();
-    //hand it over to another class
+    //show the object
     dw->show();
 
 }
