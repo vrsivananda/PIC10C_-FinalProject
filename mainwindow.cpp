@@ -78,7 +78,9 @@ void MainWindow::initializeVectors(){
 //start another window when clicked
 void MainWindow::on_pushButton_clicked()
 {
-    DisplayWindow dw;
-    dw.show();
+    //the display window object is created
+    DisplayWindow* dw = new DisplayWindow();
+    //hand it over to another class
+    dw->show();
 
 }
