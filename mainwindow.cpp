@@ -3,6 +3,8 @@
 #include "time.h"
 #include <QDebug>
 #include"displaywindow.h"
+#include <time.h>
+#include <stdlib.h>
 
 
 
@@ -11,9 +13,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    initializeVectors();
-
 
 
 
@@ -64,12 +63,12 @@ void MainWindow::on_spinBox_4_valueChanged(int arg){
 //Initialize Vectors
 void MainWindow::initializeVectors(){
     for (int i = 0; i<numberOfCongruentDots; ++i){
-        xValuesCongruent->push_back(rand());
-        yValuesCongruent->push_back(rand());
+        xValuesCongruent->push_back(rand()%width);
+        yValuesCongruent->push_back(rand()%height);
     }
     for (int i = 0; i<numberOfCongruentDots; ++i){
-        xValuesIncongruent->push_back(rand());
-        yValuesIncongruent->push_back(rand());
+        xValuesIncongruent->push_back(rand()%width);
+        yValuesIncongruent->push_back(rand()%height);
     }
 }
 
@@ -78,6 +77,7 @@ void MainWindow::initializeVectors(){
 //start another window when clicked
 void MainWindow::on_pushButton_clicked()
 {
+    initializeVectors();
     //the display window object is created
     DisplayWindow* dw = new DisplayWindow();
     //show the object

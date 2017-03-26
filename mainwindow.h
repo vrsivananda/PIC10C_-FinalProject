@@ -43,6 +43,10 @@ private:
     int speedOfDotMovement = 0;
     double timePerTrial = 0;
 
+    int width = 1300;
+    int height = 700;
+    int sizeOfDot = 20;
+
     std::vector<int>* xValuesCongruent = new std::vector<int>(numberOfCongruentDots);
     std::vector<int>* yValuesCongruent = new std::vector<int>(numberOfCongruentDots);
 
