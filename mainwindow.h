@@ -7,10 +7,12 @@ namespace Ui {
 class MainWindow;
 }
 
+class DisplayWindow;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+friend class DisplayWindow;
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -41,11 +43,13 @@ private:
     int speedOfDotMovement = 0;
     double timePerTrial = 0;
 
-    std::vector<int> xValuesCongruent;
-    std::vector<int> yValuesCongruent;
+    std::vector<int>* xValuesCongruent = new std::vector<int>(numberOfCongruentDots);
+    std::vector<int>* yValuesCongruent = new std::vector<int>(numberOfCongruentDots);
 
-    std::vector<int> xValuesIncongruent;
-    std::vector<int> yValuesIncongruent;
+    std::vector<int>* xValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
+    std::vector<int>* yValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
+
+
 
 
 

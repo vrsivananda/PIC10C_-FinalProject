@@ -1,9 +1,16 @@
 #include "displaywindow.h"
+#include "mainwindow.h"
 
 
 DisplayWindow::DisplayWindow(QWidget *parent) : QWidget(parent)
 {
     setGeometry(50,100,1300,700);
+    //numberOfCongruentDots = 1;
+}
+void DisplayWindow::drawIt(MainWindow& w){
+    this->show();
+    w.timePerTrial = 10;
+
 }
 
 void DisplayWindow::paintEvent(QPaintEvent*){

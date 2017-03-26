@@ -64,12 +64,12 @@ void MainWindow::on_spinBox_4_valueChanged(int arg){
 //Initialize Vectors
 void MainWindow::initializeVectors(){
     for (int i = 0; i<numberOfCongruentDots; ++i){
-        xValuesCongruent.push_back(rand());
-        yValuesCongruent.push_back(rand());
+        xValuesCongruent->push_back(rand());
+        yValuesCongruent->push_back(rand());
     }
     for (int i = 0; i<numberOfCongruentDots; ++i){
-        xValuesIncongruent.push_back(rand());
-        yValuesIncongruent.push_back(rand());
+        xValuesIncongruent->push_back(rand());
+        yValuesIncongruent->push_back(rand());
     }
 }
 
@@ -81,6 +81,7 @@ void MainWindow::on_pushButton_clicked()
     //the display window object is created
     DisplayWindow* dw = new DisplayWindow();
     //show the object
-    dw->show();
+    dw->drawIt(*this);
+    //dw->show();
 
 }
