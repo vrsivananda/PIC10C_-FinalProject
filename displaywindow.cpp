@@ -5,6 +5,9 @@
 DisplayWindow::DisplayWindow(QWidget *parent) : QWidget(parent)
 {
     setGeometry(50,100,1300,700);
+    timer = new QTimer(this);
+    connect (timer, SIGNAL(timeout()), this, SLOT(repaint()));
+    timer->start();
 }
 void DisplayWindow::drawIt(MainWindow& w){
 
@@ -38,9 +41,10 @@ void DisplayWindow::paintEvent(QPaintEvent*){
         int yMidValue = (*yValuesCongruent)[i];
 
         for (size_t j = 0; j<1000; ++j){
-            int xValue = xMidValue+(rand()%sizeOfDot);
-            int yValue = yMidValue+(rand()%sizeOfDot);
-            if (sqrt(((xValue-xMidValue)^2) + ((yValue-yMidValue)^2)) <= sizeOfDot){
+            int xValue = xMidValue+((rand()%sizeOfDot));
+            int yValue = yMidValue+((rand()%sizeOfDot));
+            double distanceFromCenter = sqrt(((xValue-xMidValue)^2) + ((yValue-yMidValue)^2));
+            if ( distanceFromCenter <= sizeOfDot/2){
                 background.setPixel(xValue,yValue, pixelColor);
             }
         }

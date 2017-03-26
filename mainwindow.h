@@ -45,7 +45,7 @@ private:
 
     int width = 1300;
     int height = 700;
-    int sizeOfDot = 20;
+    int sizeOfDot = 10;
 
     std::vector<int>* xValuesCongruent = new std::vector<int>(numberOfCongruentDots);
     std::vector<int>* yValuesCongruent = new std::vector<int>(numberOfCongruentDots);
