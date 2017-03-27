@@ -1,10 +1,21 @@
 #include "displaywindow.h"
 #include "mainwindow.h"
 #include <QDebug>
+#include <QDesktopWidget>
 
-DisplayWindow::DisplayWindow(QWidget *parent) : QWidget(parent)
+DisplayWindow::DisplayWindow(int& width, int& height, QWidget *parent) : QWidget(parent)
 {
-    setGeometry(50,100,1300,700);
+    int dWidth = frameGeometry().width();
+    int dHeight = frameGeometry().height();
+
+    QDesktopWidget wid;
+
+    int screenWidth = wid.screen()->width();
+    int screenHeight = wid.screen()->height();
+
+    setGeometry(/*(screenWidth/2)-(dWidth/2),(screenHeight/2)-(dHeight/2)*/2,28,screenWidth,screenHeight);
+    //setGeometry(50,100,width,height);
+
 
 }
 void DisplayWindow::takeTheVariables(MainWindow& w){
@@ -25,6 +36,7 @@ void DisplayWindow::takeTheVariables(MainWindow& w){
     width = w.width;
     height = w.height;
     sizeOfDot = w.sizeOfDot;
+    numberOfTrials = w.numberOfTrials;
 
     moveRight = rand()%2;
 

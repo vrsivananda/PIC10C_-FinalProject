@@ -14,7 +14,7 @@ class DisplayWindow : public QWidget
 {
     Q_OBJECT
 public:
-    explicit DisplayWindow(QWidget *parent = 0);
+    explicit DisplayWindow(int& width, int& height, QWidget *parent = 0);
     void paintEvent(QPaintEvent *);
     void takeTheVariables(MainWindow& w);
     void initializeVectors();
@@ -33,6 +33,7 @@ private:
     int width = 1300;
     int height = 700;
     int sizeOfDot = 10;
+    int numberOfTrials = 1;
 
     bool moveRight = 1;
 

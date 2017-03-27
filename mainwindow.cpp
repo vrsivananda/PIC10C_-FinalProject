@@ -18,11 +18,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->horizontalSlider_2->setRange(0,100);
     ui->horizontalSlider_3->setRange(0,100);
     ui->horizontalSlider_4->setRange(0,1000);
+    ui->horizontalSlider_5->setRange(0,15);
+    ui->horizontalSlider_6->setRange(0,100);
+    ui->horizontalSlider_7->setRange(1500,2000);
+    ui->horizontalSlider_8->setRange(800,1500);
 
     ui->spinBox_1->setRange(0,100);
     ui->spinBox_2->setRange(0,100);
     ui->spinBox_3->setRange(0,100);
     ui->spinBox_4->setRange(0,1000);
+    ui->spinBox_5->setRange(0,15);
+    ui->spinBox_6->setRange(0,100);
+    ui->spinBox_7->setRange(1500,2000);
+    ui->spinBox_8->setRange(800,1500);
 
 }
 
@@ -48,6 +56,22 @@ void MainWindow::on_horizontalSlider_4_valueChanged(int value){
     ui->spinBox_4->setValue(value);
     timePerTrial = value;
 }
+void MainWindow::on_horizontalSlider_5_valueChanged(int value){
+    ui->spinBox_5->setValue(value);
+    sizeOfDot = value;
+}
+void MainWindow::on_horizontalSlider_6_valueChanged(int value){
+    ui->spinBox_6->setValue(value);
+    numberOfTrials = value;
+}
+void MainWindow::on_horizontalSlider_7_valueChanged(int value){
+    ui->spinBox_7->setValue(value);
+    width = value;
+}
+void MainWindow::on_horizontalSlider_8_valueChanged(int value){
+    ui->spinBox_8->setValue(value);
+    height = value;
+}
 
 //Connect Spinbox to Slider
 void MainWindow::on_spinBox_1_valueChanged(int arg){
@@ -65,6 +89,22 @@ void MainWindow::on_spinBox_3_valueChanged(int arg){
 void MainWindow::on_spinBox_4_valueChanged(int arg){
     ui->horizontalSlider_4->setValue(arg);
     timePerTrial = arg;
+}
+void MainWindow::on_spinBox_5_valueChanged(int arg){
+    ui->horizontalSlider_5->setValue(arg);
+    sizeOfDot = arg;
+}
+void MainWindow::on_spinBox_6_valueChanged(int arg){
+    ui->horizontalSlider_6->setValue(arg);
+    numberOfTrials = arg;
+}
+void MainWindow::on_spinBox_7_valueChanged(int arg){
+    ui->horizontalSlider_7->setValue(arg);
+    width = arg;
+}
+void MainWindow::on_spinBox_8_valueChanged(int arg){
+    ui->horizontalSlider_8->setValue(arg);
+    height = arg;
 }
 
 /*
@@ -89,7 +129,7 @@ void MainWindow::on_pushButton_clicked()
     qDebug() << "inside on_pushButton_click()";
     //initializeVectors();
     //the display window object is created
-    DisplayWindow* dw = new DisplayWindow();
+    DisplayWindow* dw = new DisplayWindow(this->width,this->height);
     //show the object
     qDebug() << "Calling takeTheVariables";
     dw->takeTheVariables(*this);
