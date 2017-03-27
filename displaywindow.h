@@ -22,10 +22,10 @@ public:
 
 private:
     QTimer* timer;
-    int numberOfCongruentDots;
-    int numberOfIncongruentDots;
-    int speedOfDotMovement;
-    double timePerTrial;
+    int numberOfCongruentDots = 0;
+    int numberOfIncongruentDots = 0;
+    int speedOfDotMovement = 1;
+    double timePerTrial = 1;
 
     int width = 1300;
     int height = 700;
@@ -33,8 +33,8 @@ private:
 
     bool moveRight = 1;
 
-    std::vector<int>* xValuesCongruent = new std::vector<int>(numberOfCongruentDots);
-    std::vector<int>* yValuesCongruent = new std::vector<int>(numberOfCongruentDots);
+    std::vector<int>* xValuesCongruent;
+    std::vector<int>* yValuesCongruent;
 
     std::vector<int>* xValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
     std::vector<int>* yValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);

@@ -5,9 +5,7 @@
 DisplayWindow::DisplayWindow(QWidget *parent) : QWidget(parent)
 {
     setGeometry(50,100,1300,700);
-    timer = new QTimer(this);
-    connect (timer, SIGNAL(timeout()), this, SLOT(repaint()));
-    timer->start();
+
 }
 void DisplayWindow::takeTheVariables(MainWindow& w){
 
@@ -18,6 +16,11 @@ void DisplayWindow::takeTheVariables(MainWindow& w){
     numberOfIncongruentDots = w.numberOfIncongruentDots;
     speedOfDotMovement = w.speedOfDotMovement;
     timePerTrial = w.timePerTrial;
+
+    qDebug() << "Number of Congruent dots is " << numberOfCongruentDots;
+    qDebug() << "Number of Incongruent dots is " << numberOfIncongruentDots;
+    qDebug() << "Speed of dot movement is " << speedOfDotMovement;
+    qDebug() << "Time per trial is " << timePerTrial;
 
     //xValuesCongruent = w.xValuesCongruent;
     //yValuesCongruent = w.yValuesCongruent;
@@ -33,6 +36,10 @@ void DisplayWindow::takeTheVariables(MainWindow& w){
 
     this->showIt();
 
+    timer = new QTimer(this);
+    connect (timer, SIGNAL(timeout()), this, SLOT(repaint()));
+    timer->start(1000);
+
 }
 
 void DisplayWindow::showIt(){
@@ -46,43 +53,33 @@ void DisplayWindow::paintEvent(QPaintEvent*){
     QImage background(size(),QImage::Format_ARGB32_Premultiplied);
 
     if(moveRight){
-        for(size_t i = 0; i< yValuesCongruent->size(); ++i ){
+        for(int i = 0; i< numberOfCongruentDots; ++i ){
             (*xValuesCongruent)[i] += speedOfDotMovement;
             qDebug() << "Inside moveRight: (*xValuesCongruent)["<< i << "] is " << (*xValuesCongruent)[i];
+            qDebug() << "Inside moveRight: (*yValuesCongruent)["<< i << "] is " << (*yValuesCongruent)[i];
         }
     }
     else{
-        for(size_t i = 0; i< yValuesCongruent->size(); ++i ){
+        for(int i = 0; i< numberOfCongruentDots; ++i ){
             (*xValuesCongruent)[i] -= speedOfDotMovement;
         }
     }
 
-    for(size_t i = 0; i< yValuesCongruent->size(); ++i ){
+    for(int i = 0; i< numberOfCongruentDots; ++i ){
 
         QRgb pixelColor = qRgb(0,0,0);
         int xMidValue = (*xValuesCongruent)[i];
         int yMidValue = (*yValuesCongruent)[i];
 
-        for (size_t j = 0; j<1000; ++j){
-            int xValue = xMidValue+((rand()%sizeOfDot));
-            int yValue = yMidValue+((rand()%sizeOfDot));
-            double distanceFromCenter = sqrt(((xValue-xMidValue)^2) + ((yValue-yMidValue)^2));
-            if ( distanceFromCenter <= sizeOfDot/2){
+        for (int j = 0; j < sizeOfDot; ++j){
+            int xValue = xMidValue +j;
+            for (int k = 0; k <sizeOfDot; ++k){
+                int yValue = yMidValue +k;
                 background.setPixel(xValue,yValue, pixelColor);
             }
         }
-
     }
 
-    /*
-     QImage background(size(),QImage::Format_ARGB32_Premultiplied);
-        for (int i = 0; i<width(); ++i){
-            for (int z = 0; z<height(); ++z){
-                QRgb rgb = qRgb(rand()%255, rand()%255, rand()%255);
-                background.setPixel(i,z,rgb);
-            }
-        }
-        */
     QPainter paint(this);
     paint.drawImage(0,0,background);
     ++repaintCounter;
@@ -93,15 +90,27 @@ void DisplayWindow::paintEvent(QPaintEvent*){
 
 //Initialize Vectors
 void DisplayWindow::initializeVectors(){
+    qDebug() << "Inside initializeVectors";
 
+    xValuesCongruent = new std::vector<int>(numberOfCongruentDots);
+    yValuesCongruent = new std::vector<int>(numberOfCongruentDots);
     for (int i = 0; i<numberOfCongruentDots; ++i){
         (*xValuesCongruent)[i] = ((rand()%(width-200))+100);
         (*yValuesCongruent)[i] = ((rand()%(height-200))+100);
+        qDebug() << "(*xValuesCongruent)["<<i<<"] is " << (*xValuesCongruent)[i];
+        qDebug() << "(*yValuesCongruent)["<<i<<"] is " << (*yValuesCongruent)[i];
     }
-    for (int i = 0; i<numberOfCongruentDots; ++i){
-        (*xValuesCongruent)[i] = ((rand()%(width-200))+100);
-        (*yValuesCongruent)[i] = ((rand()%(height-200))+100);
+    qDebug() << "Finished initializing congruent dots";
+
+    xValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
+    yValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
+    for (int i = 0; i<numberOfIncongruentDots; ++i){
+        (*xValuesIncongruent)[i] = ((rand()%(width-200))+100);
+        (*yValuesIncongruent)[i] = ((rand()%(height-200))+100);
+        qDebug() << "(*xValuesIncongruent)["<<i<<"] is " << (*xValuesIncongruent)[i];
+        qDebug() << "(*yValuesIncongruent)["<<i<<"] is " << (*yValuesIncongruent)[i];
     }
+    qDebug() << "vectors successfully intialized";
 }
 
 void DisplayWindow::openNewWindow(){

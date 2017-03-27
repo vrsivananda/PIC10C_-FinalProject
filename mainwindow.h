@@ -38,8 +38,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    int numberOfCongruentDots = 100;
-    int numberOfIncongruentDots = 100;
+    int numberOfCongruentDots = 0;
+    int numberOfIncongruentDots = 0;
     int speedOfDotMovement = 0;
     double timePerTrial = 0;
 
