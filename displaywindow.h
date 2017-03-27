@@ -14,7 +14,7 @@ class DisplayWindow : public QWidget
 {
     Q_OBJECT
 public:
-    explicit DisplayWindow(int& width, int& height, QWidget *parent = 0);
+    explicit DisplayWindow(int& width, int& height, bool fullscreen, QWidget *parent = 0);
     void paintEvent(QPaintEvent *);
     void takeTheVariables(MainWindow& w);
     void initializeVectors();

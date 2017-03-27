@@ -41,7 +41,11 @@ private slots:
     void on_spinBox_7_valueChanged(int arg);
     void on_spinBox_8_valueChanged(int arg);
 
+    void on_checkBox_1_toggled(bool checked);
+
     void on_pushButton_clicked();
+
+
 
 private:
     Ui::MainWindow *ui;
@@ -55,6 +59,7 @@ private:
     int numberOfTrials = 1;
     int width = 1300;
     int height = 700;
+    bool fullscreen = false;
 
 
     //std::vector<int>* xValuesCongruent = new std::vector<int>(numberOfCongruentDots);

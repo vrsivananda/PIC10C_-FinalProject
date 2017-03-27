@@ -3,18 +3,22 @@
 #include <QDebug>
 #include <QDesktopWidget>
 
-DisplayWindow::DisplayWindow(int& width, int& height, QWidget *parent) : QWidget(parent)
+DisplayWindow::DisplayWindow(int& width, int& height, bool fullscreen, QWidget *parent) : QWidget(parent)
 {
-    int dWidth = frameGeometry().width();
-    int dHeight = frameGeometry().height();
+   // int dWidth = frameGeometry().width();
+   // int dHeight = frameGeometry().height();
 
     QDesktopWidget wid;
 
     int screenWidth = wid.screen()->width();
     int screenHeight = wid.screen()->height();
 
-    setGeometry(/*(screenWidth/2)-(dWidth/2),(screenHeight/2)-(dHeight/2)*/2,28,screenWidth,screenHeight);
-    //setGeometry(50,100,width,height);
+    if (fullscreen){
+        setGeometry(2,28,screenWidth,screenHeight);
+    }
+    else{
+        setGeometry((screenWidth-width)/2,(screenHeight-height)/2,width,height);
+    }
 
 
 }

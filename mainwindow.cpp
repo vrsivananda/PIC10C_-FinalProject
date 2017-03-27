@@ -107,6 +107,27 @@ void MainWindow::on_spinBox_8_valueChanged(int arg){
     height = arg;
 }
 
+void MainWindow::on_checkBox_1_toggled(bool checked)
+{
+    if (checked){
+        fullscreen = true;
+        qDebug() << "fullscreen is true.";
+        ui->horizontalSlider_7->setEnabled(false);
+        ui->horizontalSlider_8->setEnabled(false);
+        ui->spinBox_7->setEnabled(false);
+        ui->spinBox_8->setEnabled(false);
+
+    }
+    else if (!checked){
+        fullscreen = false;
+        qDebug() << "fullscreen is false.";
+        ui->horizontalSlider_7->setEnabled(true);
+        ui->horizontalSlider_8->setEnabled(true);
+        ui->spinBox_7->setEnabled(true);
+        ui->spinBox_8->setEnabled(true);
+    }
+}
+
 /*
 //Initialize Vectors
 void MainWindow::initializeVectors(){
@@ -129,9 +150,10 @@ void MainWindow::on_pushButton_clicked()
     qDebug() << "inside on_pushButton_click()";
     //initializeVectors();
     //the display window object is created
-    DisplayWindow* dw = new DisplayWindow(this->width,this->height);
+    DisplayWindow* dw = new DisplayWindow(this->width,this->height, this->fullscreen);
     //show the object
     qDebug() << "Calling takeTheVariables";
     dw->takeTheVariables(*this);
 
 }
+
