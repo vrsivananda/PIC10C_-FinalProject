@@ -16,18 +16,22 @@ class DisplayWindow : public QWidget
 public:
     explicit DisplayWindow(QWidget *parent = 0);
     void paintEvent(QPaintEvent *);
-    void drawIt(MainWindow& w);
+    void takeTheVariables(MainWindow& w);
+    void initializeVectors();
+    void showIt();
 
 private:
     QTimer* timer;
-    int numberOfCongruentDots = 100;
-    int numberOfIncongruentDots = 100;
-    int speedOfDotMovement = 0;
-    double timePerTrial = 0;
+    int numberOfCongruentDots;
+    int numberOfIncongruentDots;
+    int speedOfDotMovement;
+    double timePerTrial;
 
     int width = 1300;
     int height = 700;
     int sizeOfDot = 10;
+
+    bool moveRight = 1;
 
     std::vector<int>* xValuesCongruent = new std::vector<int>(numberOfCongruentDots);
     std::vector<int>* yValuesCongruent = new std::vector<int>(numberOfCongruentDots);

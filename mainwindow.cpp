@@ -59,29 +59,31 @@ void MainWindow::on_spinBox_4_valueChanged(int arg){
     timePerTrial = arg;
 }
 
-
+/*
 //Initialize Vectors
 void MainWindow::initializeVectors(){
+
     for (int i = 0; i<numberOfCongruentDots; ++i){
-        xValuesCongruent->push_back(rand()%width);
-        yValuesCongruent->push_back(rand()%height);
+        xValuesCongruent->push_back((rand()%(width-200))+100);
+        yValuesCongruent->push_back((rand()%(height-200))+100);
     }
     for (int i = 0; i<numberOfCongruentDots; ++i){
-        xValuesIncongruent->push_back(rand()%width);
-        yValuesIncongruent->push_back(rand()%height);
+        xValuesIncongruent->push_back((rand()%(width-200))+100);
+        yValuesIncongruent->push_back((rand()%(height-200))+100);
     }
 }
-
+*/
 
 
 //start another window when clicked
 void MainWindow::on_pushButton_clicked()
 {
-    initializeVectors();
+    qDebug() << "inside on_pushButton_clicked().";
+    //initializeVectors();
     //the display window object is created
     DisplayWindow* dw = new DisplayWindow();
     //show the object
-    dw->drawIt(*this);
-    //dw->show();
+    qDebug() << "Calling takeTheVariables";
+    dw->takeTheVariables(*this);
 
 }

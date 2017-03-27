@@ -1,6 +1,6 @@
 #include "displaywindow.h"
 #include "mainwindow.h"
-
+#include <QDebug>
 
 DisplayWindow::DisplayWindow(QWidget *parent) : QWidget(parent)
 {
@@ -9,7 +9,9 @@ DisplayWindow::DisplayWindow(QWidget *parent) : QWidget(parent)
     connect (timer, SIGNAL(timeout()), this, SLOT(repaint()));
     timer->start();
 }
-void DisplayWindow::drawIt(MainWindow& w){
+void DisplayWindow::takeTheVariables(MainWindow& w){
+
+    qDebug() << "Inside takeTheVariables";
 
 
     numberOfCongruentDots = w.numberOfCongruentDots;
@@ -17,22 +19,43 @@ void DisplayWindow::drawIt(MainWindow& w){
     speedOfDotMovement = w.speedOfDotMovement;
     timePerTrial = w.timePerTrial;
 
-    xValuesCongruent = w.xValuesCongruent;
-    yValuesCongruent = w.yValuesCongruent;
+    //xValuesCongruent = w.xValuesCongruent;
+    //yValuesCongruent = w.yValuesCongruent;
 
-    xValuesIncongruent = w.xValuesIncongruent;
-    yValuesIncongruent = w.yValuesIncongruent;
+    //xValuesIncongruent = w.xValuesIncongruent;
+    //yValuesIncongruent = w.yValuesIncongruent;
 
     width = w.width;
     height = w.height;
     sizeOfDot = w.sizeOfDot;
 
+    this->initializeVectors();
 
+    this->showIt();
+
+}
+
+void DisplayWindow::showIt(){
     this->show();
 }
 
+//Counter for counting how many times repaint is called
+int repaintCounter = 0;
+
 void DisplayWindow::paintEvent(QPaintEvent*){
     QImage background(size(),QImage::Format_ARGB32_Premultiplied);
+
+    if(moveRight){
+        for(size_t i = 0; i< yValuesCongruent->size(); ++i ){
+            (*xValuesCongruent)[i] += speedOfDotMovement;
+            qDebug() << "Inside moveRight: (*xValuesCongruent)["<< i << "] is " << (*xValuesCongruent)[i];
+        }
+    }
+    else{
+        for(size_t i = 0; i< yValuesCongruent->size(); ++i ){
+            (*xValuesCongruent)[i] -= speedOfDotMovement;
+        }
+    }
 
     for(size_t i = 0; i< yValuesCongruent->size(); ++i ){
 
@@ -62,7 +85,23 @@ void DisplayWindow::paintEvent(QPaintEvent*){
         */
     QPainter paint(this);
     paint.drawImage(0,0,background);
+    ++repaintCounter;
+    qDebug() << "Repaint called." << repaintCounter;
+    qDebug() << "(*xValuesCongruent)[0] is " << (*xValuesCongruent)[0];
 
+}
+
+//Initialize Vectors
+void DisplayWindow::initializeVectors(){
+
+    for (int i = 0; i<numberOfCongruentDots; ++i){
+        (*xValuesCongruent)[i] = ((rand()%(width-200))+100);
+        (*yValuesCongruent)[i] = ((rand()%(height-200))+100);
+    }
+    for (int i = 0; i<numberOfCongruentDots; ++i){
+        (*xValuesCongruent)[i] = ((rand()%(width-200))+100);
+        (*yValuesCongruent)[i] = ((rand()%(height-200))+100);
+    }
 }
 
 void DisplayWindow::openNewWindow(){
