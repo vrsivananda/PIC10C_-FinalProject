@@ -32,6 +32,8 @@ void DisplayWindow::takeTheVariables(MainWindow& w){
     height = w.height;
     sizeOfDot = w.sizeOfDot;
 
+    moveRight = rand()%2;
+
     this->initializeVectors();
 
     this->showIt();
@@ -169,8 +171,8 @@ void DisplayWindow::initializeVectors(){
     xChange = new std::vector<double>(numberOfIncongruentDots);
     yChange = new std::vector<double>(numberOfIncongruentDots);
     for (int i = 0; i<numberOfIncongruentDots; ++i){
-        (*xChange)[i] = (((double)rand()/RAND_MAX)*(speedOfDotMovement))-speedOfDotMovement;
-        (*yChange)[i] = (((double)rand()/RAND_MAX)*(speedOfDotMovement))-speedOfDotMovement;
+        (*xChange)[i] = (((double)rand()/RAND_MAX)*(speedOfDotMovement))-(speedOfDotMovement/2);
+        (*yChange)[i] = (((double)rand()/RAND_MAX)*(speedOfDotMovement))-(speedOfDotMovement/2);
         qDebug() << "(*xChange)["<<i<<"] is " << (*xChange)[i];
         qDebug() << "(*yChange)["<<i<<"] is " << (*yChange)[i];
     }
