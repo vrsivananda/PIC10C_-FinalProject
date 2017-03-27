@@ -3,10 +3,12 @@
 #include <QDebug>
 #include <QDesktopWidget>
 
-DisplayWindow::DisplayWindow(int& width, int& height, bool fullscreen, QWidget *parent) : QWidget(parent)
+DisplayWindow::DisplayWindow(int& otherWidth, int& otherHeight, bool otherfullscreen, QWidget *parent) : QWidget(parent)
 {
    // int dWidth = frameGeometry().width();
    // int dHeight = frameGeometry().height();
+
+    fullscreen = otherfullscreen;
 
     QDesktopWidget wid;
 
@@ -15,9 +17,22 @@ DisplayWindow::DisplayWindow(int& width, int& height, bool fullscreen, QWidget *
 
     if (fullscreen){
         setGeometry(2,28,screenWidth,screenHeight);
+        width = screenWidth;
+        height = screenHeight;
     }
     else{
-        setGeometry((screenWidth-width)/2,(screenHeight-height)/2,width,height);
+        if (screenWidth >= otherWidth || screenHeight >= otherHeight){
+            width = otherWidth;
+            height = otherHeight;
+            setGeometry((screenWidth-width)/2,(screenHeight-height)/2,width,height);
+        }
+        else{
+            fullscreen = true;
+            width = screenWidth;
+            height = screenHeight;
+            setGeometry(2,28,screenWidth,screenHeight);
+        }
+
     }
 
 
@@ -37,8 +52,10 @@ void DisplayWindow::takeTheVariables(MainWindow& w){
     qDebug() << "Speed of dot movement is " << speedOfDotMovement;
     qDebug() << "Time per trial is " << timePerTrial;
 
-    width = w.width;
-    height = w.height;
+    if (!fullscreen){
+        width = w.width;
+        height = w.height;
+    }
     sizeOfDot = w.sizeOfDot;
     numberOfTrials = w.numberOfTrials;
 

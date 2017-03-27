@@ -34,6 +34,7 @@ private:
     int height = 700;
     int sizeOfDot = 10;
     int numberOfTrials = 1;
+    bool fullscreen = false;
 
     bool moveRight = 1;
 
