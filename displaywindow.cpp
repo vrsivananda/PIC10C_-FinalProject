@@ -110,6 +110,16 @@ void DisplayWindow::initializeVectors(){
         qDebug() << "(*xValuesIncongruent)["<<i<<"] is " << (*xValuesIncongruent)[i];
         qDebug() << "(*yValuesIncongruent)["<<i<<"] is " << (*yValuesIncongruent)[i];
     }
+
+    xChange = new std::vector<double>(numberOfIncongruentDots);
+    yChange = new std::vector<double>(numberOfIncongruentDots);
+    for (int i = 0; i<numberOfIncongruentDots; ++i){
+        (*xChange)[i] = ((double)rand()/RAND_MAX)*(speedOfDotMovement);
+        (*yChange)[i] = ((double)rand()/RAND_MAX)*(speedOfDotMovement);
+        qDebug() << "(*xChange)["<<i<<"] is " << (*xChange)[i];
+        qDebug() << "(*yChange)["<<i<<"] is " << (*yChange)[i];
+    }
+
     qDebug() << "vectors successfully intialized";
 }
 

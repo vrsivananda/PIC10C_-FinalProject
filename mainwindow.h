@@ -40,7 +40,7 @@ private:
 
     int numberOfCongruentDots = 0;
     int numberOfIncongruentDots = 0;
-    int speedOfDotMovement = 0;
+    double speedOfDotMovement = 0;
     double timePerTrial = 0;
 
     int width = 1300;

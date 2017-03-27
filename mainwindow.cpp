@@ -78,7 +78,7 @@ void MainWindow::initializeVectors(){
 //start another window when clicked
 void MainWindow::on_pushButton_clicked()
 {
-    qDebug() << "inside on_pushButton_clicked().";
+    qDebug() << "inside on_pushButton_click()";
     //initializeVectors();
     //the display window object is created
     DisplayWindow* dw = new DisplayWindow();
