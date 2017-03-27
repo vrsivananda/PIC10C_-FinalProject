@@ -37,6 +37,7 @@ private:
     bool fullscreen = false;
 
     bool moveRight = 1;
+    bool clearTheScreen = false;
 
     std::vector<int>* xValuesCongruent;
     std::vector<int>* yValuesCongruent;

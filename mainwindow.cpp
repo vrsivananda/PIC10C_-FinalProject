@@ -128,22 +128,6 @@ void MainWindow::on_checkBox_1_toggled(bool checked)
     }
 }
 
-/*
-//Initialize Vectors
-void MainWindow::initializeVectors(){
-
-    for (int i = 0; i<numberOfCongruentDots; ++i){
-        xValuesCongruent->push_back((rand()%(width-200))+100);
-        yValuesCongruent->push_back((rand()%(height-200))+100);
-    }
-    for (int i = 0; i<numberOfCongruentDots; ++i){
-        xValuesIncongruent->push_back((rand()%(width-200))+100);
-        yValuesIncongruent->push_back((rand()%(height-200))+100);
-    }
-}
-*/
-
-
 //start another window when clicked
 void MainWindow::on_pushButton_clicked()
 {
