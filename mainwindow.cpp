@@ -14,7 +14,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->horizontalSlider_1->setRange(0,100);
+    ui->horizontalSlider_2->setRange(0,100);
+    ui->horizontalSlider_3->setRange(0,100);
+    ui->horizontalSlider_4->setRange(0,1000);
 
+    ui->spinBox_1->setRange(0,100);
+    ui->spinBox_2->setRange(0,100);
+    ui->spinBox_3->setRange(0,100);
+    ui->spinBox_4->setRange(0,1000);
 
 }
 
