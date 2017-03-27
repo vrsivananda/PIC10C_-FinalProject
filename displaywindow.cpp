@@ -38,7 +38,11 @@ void DisplayWindow::takeTheVariables(MainWindow& w){
 
     timer = new QTimer(this);
     connect (timer, SIGNAL(timeout()), this, SLOT(repaint()));
-    timer->start(1000);
+    timer->start();
+
+    trialLength = new QTimer(this);
+    connect(trialLength, SIGNAL(timeout()), timer, SLOT(stop()));
+    trialLength->start(timePerTrial);
 
 }
 
@@ -52,6 +56,12 @@ int repaintCounter = 0;
 void DisplayWindow::paintEvent(QPaintEvent*){
     QImage background(size(),QImage::Format_ARGB32_Premultiplied);
 
+    //If there is only 1 dot left, then stop the timer.
+    if (numberOfCongruentDots <= 1 || numberOfIncongruentDots <= 1){
+        timer->stop();
+    }
+
+    //Change the values in the congruent dots vector for movement
     if(moveRight){
         for(int i = 0; i< numberOfCongruentDots; ++i ){
             (*xValuesCongruent)[i] += speedOfDotMovement;
@@ -65,6 +75,7 @@ void DisplayWindow::paintEvent(QPaintEvent*){
         }
     }
 
+    //Paint in the squares for the Congruent Dots
     for(int i = 0; i< numberOfCongruentDots; ++i ){
 
         QRgb pixelColor = qRgb(0,0,0);
@@ -79,6 +90,50 @@ void DisplayWindow::paintEvent(QPaintEvent*){
             }
         }
     }
+
+    //Change values in incongruent dots vector for movement
+    for (int i = 0; i< numberOfIncongruentDots; ++i){
+        (*xValuesIncongruent)[i] += (*xChange)[i];
+        (*yValuesIncongruent)[i] += (*yChange)[i];
+    }
+
+    //Fill in incongruent dots
+    for(int i = 0; i< numberOfIncongruentDots; ++i ){
+
+        QRgb pixelColor = qRgb(0,0,0);
+        int xMidValue = (*xValuesIncongruent)[i];
+        int yMidValue = (*yValuesIncongruent)[i];
+
+        for (int j = 0; j < sizeOfDot; ++j){
+            int xValue = xMidValue +j;
+            for (int k = 0; k <sizeOfDot; ++k){
+                int yValue = yMidValue +k;
+                background.setPixel(xValue,yValue, pixelColor);
+            }
+        }
+    }
+
+    //Check if dots have gone out of bounds. Delete those that do.
+    //Congruent
+    for (int i = 0; i<numberOfCongruentDots; ++i){
+        if ((*xValuesCongruent)[i] < 0 || (*xValuesCongruent)[i] > (width-sizeOfDot) || (*yValuesCongruent)[i] < 0 || (*yValuesCongruent)[i] > height){
+            (*xValuesCongruent).erase((*xValuesCongruent).begin() + i);
+            (*yValuesCongruent).erase((*yValuesCongruent).begin() + i);
+            numberOfCongruentDots -= 1;
+            qDebug() << "Congruent index " << i << "deleted.";
+        }
+    }
+
+    //Incongruent
+    for (int i = 0; i<numberOfIncongruentDots; ++i){
+        if ((*xValuesIncongruent)[i] < 0 || (*xValuesIncongruent)[i] > (width-sizeOfDot) || (*yValuesIncongruent)[i] < 0 || (*yValuesIncongruent)[i] > height){
+            (*xValuesIncongruent).erase((*xValuesIncongruent).begin() + i);
+            (*yValuesIncongruent).erase((*yValuesIncongruent).begin() + i);
+            numberOfIncongruentDots -= 1;
+            qDebug() << "Incongruent index " << i << "deleted.";
+        }
+    }
+
 
     QPainter paint(this);
     paint.drawImage(0,0,background);
@@ -102,8 +157,8 @@ void DisplayWindow::initializeVectors(){
     }
     qDebug() << "Finished initializing congruent dots";
 
-    xValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
-    yValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
+    xValuesIncongruent = new std::vector<double>(numberOfIncongruentDots);
+    yValuesIncongruent = new std::vector<double>(numberOfIncongruentDots);
     for (int i = 0; i<numberOfIncongruentDots; ++i){
         (*xValuesIncongruent)[i] = ((rand()%(width-200))+100);
         (*yValuesIncongruent)[i] = ((rand()%(height-200))+100);
@@ -114,11 +169,13 @@ void DisplayWindow::initializeVectors(){
     xChange = new std::vector<double>(numberOfIncongruentDots);
     yChange = new std::vector<double>(numberOfIncongruentDots);
     for (int i = 0; i<numberOfIncongruentDots; ++i){
-        (*xChange)[i] = ((double)rand()/RAND_MAX)*(speedOfDotMovement);
-        (*yChange)[i] = ((double)rand()/RAND_MAX)*(speedOfDotMovement);
+        (*xChange)[i] = (((double)rand()/RAND_MAX)*(speedOfDotMovement))-speedOfDotMovement;
+        (*yChange)[i] = (((double)rand()/RAND_MAX)*(speedOfDotMovement))-speedOfDotMovement;
         qDebug() << "(*xChange)["<<i<<"] is " << (*xChange)[i];
         qDebug() << "(*yChange)["<<i<<"] is " << (*yChange)[i];
     }
+
+
 
     qDebug() << "vectors successfully intialized";
 }

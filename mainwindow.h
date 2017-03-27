@@ -47,11 +47,11 @@ private:
     int height = 700;
     int sizeOfDot = 10;
 
-    std::vector<int>* xValuesCongruent = new std::vector<int>(numberOfCongruentDots);
-    std::vector<int>* yValuesCongruent = new std::vector<int>(numberOfCongruentDots);
+    //std::vector<int>* xValuesCongruent = new std::vector<int>(numberOfCongruentDots);
+    //std::vector<int>* yValuesCongruent = new std::vector<int>(numberOfCongruentDots);
 
-    std::vector<int>* xValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
-    std::vector<int>* yValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
+    //std::vector<int>* xValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
+    //std::vector<int>* yValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
 
 
 

@@ -22,6 +22,8 @@ public:
 
 private:
     QTimer* timer;
+    QTimer* trialLength;
+
     int numberOfCongruentDots = 0;
     int numberOfIncongruentDots = 0;
     double speedOfDotMovement = 0;
@@ -36,8 +38,8 @@ private:
     std::vector<int>* xValuesCongruent;
     std::vector<int>* yValuesCongruent;
 
-    std::vector<int>* xValuesIncongruent;
-    std::vector<int>* yValuesIncongruent;
+    std::vector<double>* xValuesIncongruent;
+    std::vector<double>* yValuesIncongruent;
 
     std::vector<double>* xChange;
     std::vector<double>* yChange;
