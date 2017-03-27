@@ -22,12 +22,6 @@ void DisplayWindow::takeTheVariables(MainWindow& w){
     qDebug() << "Speed of dot movement is " << speedOfDotMovement;
     qDebug() << "Time per trial is " << timePerTrial;
 
-    //xValuesCongruent = w.xValuesCongruent;
-    //yValuesCongruent = w.yValuesCongruent;
-
-    //xValuesIncongruent = w.xValuesIncongruent;
-    //yValuesIncongruent = w.yValuesIncongruent;
-
     width = w.width;
     height = w.height;
     sizeOfDot = w.sizeOfDot;
@@ -36,7 +30,8 @@ void DisplayWindow::takeTheVariables(MainWindow& w){
 
     this->initializeVectors();
 
-    this->showIt();
+    //this->showIt();
+    this->show();
 
     timer = new QTimer(this);
     connect (timer, SIGNAL(timeout()), this, SLOT(repaint()));
@@ -45,11 +40,12 @@ void DisplayWindow::takeTheVariables(MainWindow& w){
     trialLength = new QTimer(this);
     connect(trialLength, SIGNAL(timeout()), timer, SLOT(stop()));
     trialLength->start(timePerTrial);
+    connect(trialLength, SIGNAL(timeout()), this, SLOT(clearScreen()));
 
 }
 
 void DisplayWindow::showIt(){
-    this->show();
+    //this->show();
 }
 
 //Counter for counting how many times repaint is called
@@ -59,7 +55,7 @@ void DisplayWindow::paintEvent(QPaintEvent*){
     QImage background(size(),QImage::Format_ARGB32_Premultiplied);
 
     //If there is only 1 dot left, then stop the timer.
-    if (numberOfCongruentDots <= 1 || numberOfIncongruentDots <= 1){
+    if (numberOfCongruentDots <= 1 && numberOfIncongruentDots <= 1){
         timer->stop();
     }
 
@@ -131,6 +127,8 @@ void DisplayWindow::paintEvent(QPaintEvent*){
         if ((*xValuesIncongruent)[i] < 0 || (*xValuesIncongruent)[i] > (width-sizeOfDot) || (*yValuesIncongruent)[i] < 0 || (*yValuesIncongruent)[i] > height){
             (*xValuesIncongruent).erase((*xValuesIncongruent).begin() + i);
             (*yValuesIncongruent).erase((*yValuesIncongruent).begin() + i);
+            (*xChange).erase((*xChange).begin() + i);
+            (*yChange).erase((*yChange).begin() + i);
             numberOfIncongruentDots -= 1;
             qDebug() << "Incongruent index " << i << "deleted.";
         }
@@ -139,10 +137,9 @@ void DisplayWindow::paintEvent(QPaintEvent*){
 
     QPainter paint(this);
     paint.drawImage(0,0,background);
+
     ++repaintCounter;
     qDebug() << "Repaint called." << repaintCounter;
-    qDebug() << "(*xValuesCongruent)[0] is " << (*xValuesCongruent)[0];
-
 }
 
 //Initialize Vectors
@@ -177,9 +174,14 @@ void DisplayWindow::initializeVectors(){
         qDebug() << "(*yChange)["<<i<<"] is " << (*yChange)[i];
     }
 
-
-
     qDebug() << "vectors successfully intialized";
+}
+
+void DisplayWindow::clearScreen(){
+    qDebug() << "clearScreen called.";
+    QImage background(size(),QImage::Format_ARGB32_Premultiplied);
+    QPainter paint(this);
+    paint.drawImage(0,0,background);
 }
 
 void DisplayWindow::openNewWindow(){

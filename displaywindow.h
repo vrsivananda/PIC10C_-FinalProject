@@ -19,6 +19,7 @@ public:
     void takeTheVariables(MainWindow& w);
     void initializeVectors();
     void showIt();
+    void clearScreen();
 
 private:
     QTimer* timer;
