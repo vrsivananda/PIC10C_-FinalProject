@@ -6,6 +6,7 @@
 
 int main(int argc, char *argv[])
 {
+    //Seed the random number generator
     srand (time(NULL));
 
     QApplication a(argc, argv);

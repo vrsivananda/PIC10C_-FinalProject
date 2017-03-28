@@ -7,7 +7,7 @@
 #include <stdlib.h>
 
 
-
+//Constructor
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -18,8 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->horizontalSlider_2->setRange(0,100);
     ui->horizontalSlider_3->setRange(0,100);
     ui->horizontalSlider_4->setRange(0,1000);
-    ui->horizontalSlider_5->setRange(0,15);
-    ui->horizontalSlider_6->setRange(0,100);
+    ui->horizontalSlider_5->setRange(1,15);
+    ui->horizontalSlider_6->setRange(1,100);
     ui->horizontalSlider_7->setRange(1500,2000);
     ui->horizontalSlider_8->setRange(800,1500);
 
@@ -27,13 +27,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->spinBox_2->setRange(0,100);
     ui->spinBox_3->setRange(0,100);
     ui->spinBox_4->setRange(0,1000);
-    ui->spinBox_5->setRange(0,15);
-    ui->spinBox_6->setRange(0,100);
+    ui->spinBox_5->setRange(1,15);
+    ui->spinBox_6->setRange(1,100);
     ui->spinBox_7->setRange(1500,2000);
     ui->spinBox_8->setRange(800,1500);
 
 }
 
+//Destructor
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -107,20 +108,23 @@ void MainWindow::on_spinBox_8_valueChanged(int arg){
     height = arg;
 }
 
+//See if the user wants fullscreen
 void MainWindow::on_checkBox_1_toggled(bool checked)
 {
+    //If yes, then set the fullscreen boolean to be true
+    //And disable all the settings for the screen dimensions
     if (checked){
         fullscreen = true;
-        qDebug() << "fullscreen is true.";
         ui->horizontalSlider_7->setEnabled(false);
         ui->horizontalSlider_8->setEnabled(false);
         ui->spinBox_7->setEnabled(false);
         ui->spinBox_8->setEnabled(false);
 
     }
+    //If no, set the fullscreen boolean to be false
+    //And enable all the settings for the screen dimensions
     else if (!checked){
         fullscreen = false;
-        qDebug() << "fullscreen is false.";
         ui->horizontalSlider_7->setEnabled(true);
         ui->horizontalSlider_8->setEnabled(true);
         ui->spinBox_7->setEnabled(true);
@@ -132,11 +136,11 @@ void MainWindow::on_checkBox_1_toggled(bool checked)
 void MainWindow::on_pushButton_clicked()
 {
     qDebug() << "inside on_pushButton_click()";
-    //initializeVectors();
-    //the display window object is created
+
+    // construct the displaywindow and pass in some parameters
     DisplayWindow* dw = new DisplayWindow(this->width,this->height, this->fullscreen);
-    //show the object
-    qDebug() << "Calling takeTheVariables";
+
+    //call the function to take the variables from this object and proceed with the other functionality
     dw->takeTheVariables(*this);
 
 }

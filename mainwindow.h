@@ -17,8 +17,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    //void initializeVectors();
-
 private slots:
 
     //Connect Slider to Spinbox
@@ -41,8 +39,10 @@ private slots:
     void on_spinBox_7_valueChanged(int arg);
     void on_spinBox_8_valueChanged(int arg);
 
+    //checkbox for fullscreen
     void on_checkBox_1_toggled(bool checked);
 
+    //push button to start the trials
     void on_pushButton_clicked();
 
 
@@ -50,28 +50,17 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
+    //declare and initialize the public variables
     int numberOfCongruentDots = 0;
     int numberOfIncongruentDots = 0;
     double speedOfDotMovement = 0;
     double timePerTrial = 0;
 
-    int sizeOfDot = 5;
+    int sizeOfDot = 1;
     int numberOfTrials = 1;
     int width = 1300;
     int height = 700;
     bool fullscreen = false;
-
-
-    //std::vector<int>* xValuesCongruent = new std::vector<int>(numberOfCongruentDots);
-    //std::vector<int>* yValuesCongruent = new std::vector<int>(numberOfCongruentDots);
-
-    //std::vector<int>* xValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
-    //std::vector<int>* yValuesIncongruent = new std::vector<int>(numberOfIncongruentDots);
-
-
-
-
-
 
 };
 
