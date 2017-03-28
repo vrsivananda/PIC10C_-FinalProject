@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //Set the ranges for the sliders
     ui->horizontalSlider_1->setRange(0,100);
     ui->horizontalSlider_2->setRange(0,100);
     ui->horizontalSlider_3->setRange(0,100);
@@ -23,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->horizontalSlider_7->setRange(1500,2000);
     ui->horizontalSlider_8->setRange(800,1500);
 
+    //Set the ranges for the spinboxes
     ui->spinBox_1->setRange(0,100);
     ui->spinBox_2->setRange(0,100);
     ui->spinBox_3->setRange(0,100);

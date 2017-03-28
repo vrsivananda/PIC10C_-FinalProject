@@ -286,5 +286,4 @@ void DisplayWindow::clearScreen(){
 
 void DisplayWindow::closeEvent(QCloseEvent*){
     rerunTrial->stop();
-    //event->accept();
 }
